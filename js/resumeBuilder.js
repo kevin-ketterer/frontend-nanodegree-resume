@@ -24,26 +24,25 @@ var work = {
             "employer": "Advantage Cable Services",
             "title": "Web Application Developer",
             "dates": "May 2014 - Present",
-            "description": ""
+            "location" : "Arlington, TX",
+            "description": "Developing ASP.NET application using C#, Razor, jQuery, and Bootstap"
         },
         {
             "employer": "RadioShack",
             "title": "Web Application Developer",
             "dates": "February 2014 - Present",
-            "description": ""
+            "location": "Fort Worth, TX",
+            "description": "Developed ASP.NET and Flex applications"
         },
         {
             "employer": "RadioShack",
             "title": "Senior Training Specialist",
             "dates": "February 2014 - Present",
-            "description": ""
+            "location": "Fort Worth, TX",
+            "description": "Developed online training using Flash, Photoshop, and Fireworks"
         }
     ]
 };
-
-//var education = {};
-//education["name"] = "Capella University";
-//education["yearsAttended"] = "2012 - 2014";
 
 var education = {
     "schools": [
@@ -75,3 +74,33 @@ $("#main").append(bio.firstName + " " + bio.lastName);
 $("#workExperience").append(work["position"]);
 $("#education").append(education.name);
 
+$('#header').append(HTMLskillsStart);
+if (bio.skills.length > 0) {
+    for (var i = 0; i < bio.skills.length; i++) {
+        var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+        $('#header').append(formattedSkills);
+    }
+}
+
+function DisplayWork() {
+    for (job in work.jobs) {
+        $('#workExperience').append(HTMLworkStart);
+        var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+        var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+        $('.work-entry:last').append(formattedEmployer + formattedTitle);
+        var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+        $('.work-entry:last').append(formattedDates);
+        var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+        $('.work-entry:last').append(formattedDescription);
+    }
+};
+
+DisplayWork();
+
+function Locationizer(work_obj) {
+    var locations;
+}
+
+$(document).click(function(loc) {
+    logClicks(loc.pageX, loc.pageY);
+});
